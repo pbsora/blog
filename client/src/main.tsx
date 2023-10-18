@@ -4,11 +4,14 @@ import {
   createBrowserRouter as Router,
   RouterProvider,
 } from "react-router-dom";
+import axios from "axios";
 
 import Header from "./Header.tsx";
 import "./index.css";
 import Home from "./Pages/Home.tsx";
 import PostDetail from "./Pages/PostDetail.tsx";
+
+axios.defaults.baseURL = "http://localhost:3000/";
 
 const router = Router([
   {
@@ -17,7 +20,7 @@ const router = Router([
     children: [
       { path: "/", element: <Home /> },
       {
-        path: "/post/:id",
+        path: "/post/:slug",
         element: <PostDetail />,
       },
     ],

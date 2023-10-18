@@ -8,7 +8,8 @@ const Comment = require("../models/Comment");
 router.get("/post", async (req, res) => {
   try {
     const posts = await Post.find({ public: true });
-    res.status(200).json(posts);
+    /* res.status(200).json(posts); */
+    res.send(posts);
   } catch (error) {
     console.log(error);
   }
@@ -24,6 +25,20 @@ router.post("/post", async (req, res) => {
     });
     await newPost.save();
     res.status(201).json({ message: "Post created sucessfully" });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+router.get("/post/:slug", async (req, res) => {
+  const { slug } = req.params;
+
+  try {
+    const post = await Post.findOne(
+      { slug },
+      { title: 1, post: 1, postedAt: 1 }
+    ).exec();
+    res.status(200).send(post);
   } catch (error) {
     console.log(error);
   }
