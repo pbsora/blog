@@ -4,7 +4,7 @@ import { AiFillGithub } from "react-icons/ai";
 function Header() {
   return (
     <>
-      <header className="font-roboto bg-black text-white text-3xl flex justify-around items-center py-6 sticky top-0">
+      <header className="font-roboto bg-black text-white text-3xl flex justify-around items-center py-6 sticky top-0 z-50">
         <h1>
           <Link to="/"> Sora</Link>
         </h1>
