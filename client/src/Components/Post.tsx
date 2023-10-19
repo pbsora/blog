@@ -22,7 +22,7 @@ const Post = ({ title, content, date, slug }: Props) => {
           typeof date === "string" ? new Date(date) : date
         ).toLocaleString(DateTime.DATE_SHORT)}
       </span>
-      <p className="col-span-4 text-left line-clamp-4">{content}</p>
+      <p className="col-span-4 text-left line-clamp-6">{content}</p>
       <button className="col-span-4 text-center border-t-2  mt-3 py-3 cursor-pointer">
         <Link to={`/post/${slug}`}>Read more</Link>
       </button>

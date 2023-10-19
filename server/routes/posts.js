@@ -46,8 +46,10 @@ router.get("/post/:slug", async (req, res) => {
 
 router.get("/post/:id/comment", async (req, res) => {
   try {
-    const comments = await Comment.find({ postId: req.params.id });
-    res.json(comments);
+    const comments = await Comment.find({ postId: req.params.id })
+      .sort({ createdAt: -1 })
+      .exec();
+    res.send(comments);
   } catch (error) {
     console.log(error);
   }

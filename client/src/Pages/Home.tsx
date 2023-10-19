@@ -35,7 +35,7 @@ const Home = () => {
 
   if (load)
     return (
-      <div className="w-screen h-[100vh] grid place-content-center">
+      <div className="w-screen absolute top-52 grid place-content-center">
         <FallingLines color="black" />
       </div>
     );
