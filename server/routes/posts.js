@@ -5,6 +5,8 @@ const mongoose = require("mongoose");
 const Post = require("../models/Post");
 const Comment = require("../models/Comment");
 
+const jwt = require("jsonwebtoken");
+
 router.get("/post", async (req, res) => {
   try {
     const posts = await Post.find({ public: true });
@@ -15,16 +17,19 @@ router.get("/post", async (req, res) => {
   }
 });
 
-router.post("/post", async (req, res) => {
+router.post("/post", verifyToken, async (req, res) => {
   try {
-    const { title, post, public } = req.body;
-    const newPost = new Post({
-      title,
-      post,
-      public,
+    jwt.verify(req.token, "puguinho", async (err, authData) => {
+      if (err) return res.status(403).json({ message: "Token not valid" });
+      const { title, post, public } = req.body;
+      const newPost = new Post({
+        title,
+        post,
+        public,
+      });
+      await newPost.save();
+      res.status(201).json({ authData, message: "Post created sucessfully" });
     });
-    await newPost.save();
-    res.status(201).json({ message: "Post created sucessfully" });
   } catch (error) {
     console.log(error);
   }
@@ -72,4 +77,13 @@ router.post("/post/:id/comment", async (req, res) => {
   }
 });
 
+//Verify token
+function verifyToken(req, res, next) {
+  const bearerHeader = req.headers["authorization"];
+  if (typeof bearerHeader === "undefined")
+    return res.status(403).json({ message: "Token not found" });
+  const bearerToken = bearerHeader.split(" ")[1];
+  req.token = bearerToken;
+  next();
+}
 module.exports = router;

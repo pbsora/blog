@@ -1,4 +1,8 @@
+import useLocalStorage from "../Hooks/useLocalStorage";
+
 const NewPost = () => {
-  return <div>NewPost</div>;
+  const { value } = useLocalStorage("token");
+
+  return <div>{value}</div>;
 };
 export default NewPost;
