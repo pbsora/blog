@@ -4,6 +4,8 @@ import Header from "../Header.tsx";
 import Home from "../Pages/Home.tsx";
 import PostDetail from "../Pages/PostDetail.tsx";
 import { AnimatePresence } from "framer-motion";
+import Login from "../Pages/Login.tsx";
+import NewPost from "../Pages/NewPost.tsx";
 
 const Routes = () => {
   const element = useRoutes([
@@ -16,6 +18,8 @@ const Routes = () => {
           path: "/post/:slug",
           element: <PostDetail />,
         },
+        { path: "/login", element: <Login /> },
+        { path: "/new-post", element: <NewPost /> },
       ],
     },
   ]);

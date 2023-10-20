@@ -23,9 +23,13 @@ const Post = ({ title, content, date, slug }: Props) => {
         ).toLocaleString(DateTime.DATE_SHORT)}
       </span>
       <p className="col-span-4 text-left line-clamp-6">{content}</p>
-      <button className="col-span-4 text-center border-t-2  mt-3 py-3 cursor-pointer">
-        <Link to={`/post/${slug}`}>Read more</Link>
-      </button>
+
+      <Link
+        to={`/post/${slug}`}
+        className="col-span-4 text-center border-t-2  mt-3 py-3 cursor-pointer hover:bg-zinc-300 rounded duration-200"
+      >
+        Read more
+      </Link>
     </div>
   );
 };

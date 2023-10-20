@@ -4,6 +4,7 @@ const app = express();
 const bcrypt = require("bcryptjs");
 require("dotenv").config();
 const cors = require("cors");
+const jwt = require("jsonwebtoken");
 
 const postRouter = require("./routes/posts");
 
@@ -36,6 +37,22 @@ app.post("/user", async (req, res) => {
   });
   await user.save();
   res.json({ message: "User created sucessfully" });
+});
+
+app.post("/api/login", async (req, res) => {
+  const { username, password } = req.body;
+
+  try {
+    const user = await User.findOne({ username }).exec();
+    if (!user) return res.json({ message: "User does not exist" });
+    const match = await bcrypt.compare(password, user.password);
+    if (!match) return res.send({ message: "Password doesn't match" });
+    jwt.sign({ user: username }, "puguinho", (err, token) => {
+      res.json({ token });
+    });
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 app.listen(3000, () => {

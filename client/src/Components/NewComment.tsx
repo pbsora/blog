@@ -24,10 +24,6 @@ const NewComment = ({ id, setShowNewComment }: Props) => {
     });
     if (comment.status === 201) {
       setShowNewComment(false);
-      /* setComments((prev) => ({
-        ...prev,
-        message,
-      })); */
     }
   };
 
@@ -51,14 +47,14 @@ const NewComment = ({ id, setShowNewComment }: Props) => {
         </label>
         <input
           type="text"
-          name="author"
+          id="author"
           className="border border-black w-full xl:w-2/4  py-3 px-2 rounded-xl"
           onChange={handleChange}
           value={message.author}
         />
       </div>
       <div className=" mt-3">
-        <label htmlFor="author" className="block mb-2 text-lg">
+        <label htmlFor="author" className="block mb-2 text-lg ">
           Comment
         </label>
         <textarea
@@ -73,7 +69,7 @@ const NewComment = ({ id, setShowNewComment }: Props) => {
       </div>
       <button
         type="submit"
-        className="border border-black py-3 px-24 rounded-lg mt-3 hover:bg-zinc-200"
+        className="border border-black py-3 px-24 rounded-lg mt-3 hover:bg-zinc-200 duration-200"
       >
         New comment
       </button>

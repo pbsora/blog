@@ -8,7 +8,7 @@ const Comment = require("../models/Comment");
 router.get("/post", async (req, res) => {
   try {
     const posts = await Post.find({ public: true });
-    /* res.status(200).json(posts); */
+
     res.send(posts);
   } catch (error) {
     console.log(error);

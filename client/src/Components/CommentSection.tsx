@@ -26,11 +26,11 @@ const CommentSection = ({ id }: Props) => {
   console.log(comments);
 
   return (
-    <div id="comments">
-      <div className="flex justify-around items-center">
+    <div id="comments" ref={parent}>
+      <div className="flex justify-around items-start">
         <p className="text-2xl text-center mb-6">Comments</p>
         <button
-          className="border-2 border-black p-3 rounded-xl hover:bg-zinc-200"
+          className="border-2 border-black p-3 rounded-xl hover:bg-zinc-200 duration-200"
           onClick={() => setShowNewComment(true)}
         >
           New comment
@@ -39,17 +39,20 @@ const CommentSection = ({ id }: Props) => {
       {showNewComment && (
         <NewComment id={id} setShowNewComment={setShowNewComment} />
       )}
-      <div ref={parent} className="text-center mt-12 text-lg">
-        {comments.length !== 0
-          ? comments.map((comment) => (
-              <Comment
-                content={comment.content}
-                author={comment.author}
-                createdAt={comment.createdAt}
-              />
-            ))
-          : "No comments here"}
-      </div>
+
+      {comments.length !== 0 ? (
+        comments.map((comment) => (
+          <Comment
+            content={comment.content}
+            author={comment.author}
+            createdAt={comment.createdAt}
+          />
+        ))
+      ) : (
+        <p className="text-xl block m-auto text-center mt-10">
+          No comments here
+        </p>
+      )}
     </div>
   );
 };
