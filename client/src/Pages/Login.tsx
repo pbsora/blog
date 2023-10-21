@@ -3,7 +3,6 @@ import axios from "axios";
 import useLocalStorage from "../Hooks/useLocalStorage";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-
 import { UserContext, ILogged } from "../Components/Context/Context";
 
 const Login = () => {
@@ -15,7 +14,7 @@ const Login = () => {
     error: false,
     message: "",
   });
-  const { setValue } = useLocalStorage("token", null);
+  const { setValue } = useLocalStorage("token");
   const navigate = useNavigate();
   const { setLogged, logged } = useContext(UserContext) as ILogged;
 

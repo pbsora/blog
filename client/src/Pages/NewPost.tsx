@@ -1,17 +1,11 @@
 import { UserContext, ILogged } from "../Components/Context/Context";
-import { useContext, useEffect, useRef } from "react";
+import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Editor } from "@tinymce/tinymce-react";
 
 const NewPost = () => {
   const { logged } = useContext(UserContext) as ILogged;
   const navigate = useNavigate();
-  const editorRef = useRef(null);
-  const log = () => {
-    if (editorRef.current) {
-      console.log(editorRef.current.getContent());
-    }
-  };
 
   useEffect(() => {
     if (!logged) {

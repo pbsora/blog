@@ -10,14 +10,14 @@ type Props = {
 };
 const Post = ({ title, content, date, slug }: Props) => {
   return (
-    <div className="grid grid-cols-4 font-roboto py-3 px-5 shadow-xl  m-auto rounded-lg border-2  border-l-4 border-l-lime-500">
+    <div className="grid w-full grid-cols-4 px-5 py-3 m-auto border-2 border-l-4 rounded-lg shadow-xl font-roboto border-l-lime-500">
       <h1
         id="title"
-        className="col-span-4 text-left md:col-span-2 text-3xl mb-3"
+        className="col-span-4 mb-3 text-3xl text-left md:col-span-2"
       >
         {title}
       </h1>
-      <span className="col-span-4 text-left  md:col-span-2 text-lg font-extralight ">
+      <span className="col-span-4 text-lg text-left md:col-span-2 font-extralight ">
         {DateTime.fromJSDate(
           typeof date === "string" ? new Date(date) : date
         ).toLocaleString(DateTime.DATE_SHORT)}
@@ -26,7 +26,7 @@ const Post = ({ title, content, date, slug }: Props) => {
 
       <Link
         to={`/post/${slug}`}
-        className="col-span-4 text-center border-t-2  mt-3 py-3 cursor-pointer hover:bg-zinc-300 rounded duration-200"
+        className="col-span-4 py-3 mt-3 text-center duration-200 border-t-2 rounded cursor-pointer hover:bg-zinc-300"
       >
         Read more
       </Link>

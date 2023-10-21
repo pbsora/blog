@@ -39,7 +39,7 @@ const CommentSection = ({ id }: Props) => {
         <NewComment id={id} setShowNewComment={setShowNewComment} />
       )}
 
-      {comments.length !== 0 ? (
+      {comments.length ? (
         comments.map((comment) => (
           <Comment
             content={comment.content}

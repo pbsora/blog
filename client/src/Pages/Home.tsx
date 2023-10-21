@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-
 import Post from "../Components/Post";
 import axios from "axios";
 import { motion } from "framer-motion";
@@ -50,7 +49,7 @@ const Home = () => {
         Latest posts
       </p>
       {posts.map((post) => (
-        <div key={post._id}>
+        <div key={post._id} className="w-full">
           <Post
             title={post.title}
             date={post.postedAt}

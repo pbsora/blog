@@ -20,12 +20,13 @@ function Header() {
           headers: { Authorization: `Bearer ${value}` },
           withCredentials: true,
         });
-        setLogged(data.user);
+        console.log(data);
+        if (!logged) setLogged(data.user);
       };
       auth();
     }
-  }, [value, setLogged]);
-  console.log(logged);
+  }, [value, setLogged, logged]);
+
   return (
     <>
       <header className="sticky top-0 z-50 flex items-center justify-around py-6 text-3xl text-white bg-black font-roboto">

@@ -21,7 +21,7 @@ router.get("/post", async (req, res) => {
   }
 });
 
-router.post("/post", verifyToken, async (req, res) => {
+router.post("/post", async (req, res) => {
   try {
     const { title, post, public } = req.body;
     const newPost = new Post({
