@@ -9,8 +9,7 @@ const useLocalStorage = (key: string, initialValue?: unknown) => {
   useEffect(() => {
     const item = localStorage.getItem(key);
     if (item) {
-      JSON.parse(item);
-      setStoredValue(item);
+      setStoredValue(JSON.parse(item));
     }
   }, [key]);
 

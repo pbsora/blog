@@ -7,6 +7,10 @@ const Comment = require("../models/Comment");
 
 const jwt = require("jsonwebtoken");
 
+router.post("/auth", verifyToken, (req, res) => {
+  res.send(req.user);
+});
+
 router.get("/post", async (req, res) => {
   try {
     const posts = await Post.find({ public: true });
@@ -19,17 +23,14 @@ router.get("/post", async (req, res) => {
 
 router.post("/post", verifyToken, async (req, res) => {
   try {
-    jwt.verify(req.token, "puguinho", async (err, authData) => {
-      if (err) return res.status(403).json({ message: "Token not valid" });
-      const { title, post, public } = req.body;
-      const newPost = new Post({
-        title,
-        post,
-        public,
-      });
-      await newPost.save();
-      res.status(201).json({ authData, message: "Post created sucessfully" });
+    const { title, post, public } = req.body;
+    const newPost = new Post({
+      title,
+      post,
+      public,
     });
+    await newPost.save();
+    res.status(201).json({ authData, message: "Post created sucessfully" });
   } catch (error) {
     console.log(error);
   }
@@ -80,10 +81,17 @@ router.post("/post/:id/comment", async (req, res) => {
 //Verify token
 function verifyToken(req, res, next) {
   const bearerHeader = req.headers["authorization"];
-  if (typeof bearerHeader === "undefined")
-    return res.status(403).json({ message: "Token not found" });
   const bearerToken = bearerHeader.split(" ")[1];
+  if (bearerHeader == null) return res.status(401);
+
+  jwt.verify(bearerToken, "puguinho", (err, user) => {
+    if (err) return res.send("Token not valid");
+    req.user = user;
+    next();
+  });
+
   req.token = bearerToken;
+
   next();
 }
 module.exports = router;

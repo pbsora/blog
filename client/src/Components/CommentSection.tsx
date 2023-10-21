@@ -18,19 +18,18 @@ const CommentSection = ({ id }: Props) => {
         url: `/api/post/${id}/comment`,
         withCredentials: true,
       });
-      console.log(data);
+
       setComments(data);
     };
     getComments();
   }, [id, showNewComment]);
-  console.log(comments);
 
   return (
     <div id="comments" ref={parent}>
-      <div className="flex justify-around items-start">
-        <p className="text-2xl text-center mb-6">Comments</p>
+      <div className="flex items-start justify-around">
+        <p className="mb-6 text-2xl text-center">Comments</p>
         <button
-          className="border-2 border-black p-3 rounded-xl hover:bg-zinc-200 duration-200"
+          className="p-3 duration-200 border-2 border-black rounded-xl hover:bg-zinc-200"
           onClick={() => setShowNewComment(true)}
         >
           New comment
@@ -49,7 +48,7 @@ const CommentSection = ({ id }: Props) => {
           />
         ))
       ) : (
-        <p className="text-xl block m-auto text-center mt-10">
+        <p className="block m-auto mt-10 text-xl text-center">
           No comments here
         </p>
       )}

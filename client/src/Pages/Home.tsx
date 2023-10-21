@@ -31,11 +31,10 @@ const Home = () => {
     };
     getPosts();
   }, []);
-  console.log(posts);
 
   if (load)
     return (
-      <div className="w-screen absolute top-52 grid place-content-center">
+      <div className="absolute grid w-screen top-52 place-content-center">
         <FallingLines color="black" />
       </div>
     );
@@ -47,17 +46,19 @@ const Home = () => {
       animate={{ x: 0, transition: { duration: 0.7 } }}
       exit={{ x: -5000, opacity: 0, transition: { duration: 0.7 } }}
     >
-      <p className="text-left  self-start ml-5 text-3xl text-green-600 border-b-2 border-green-600">
+      <p className="self-start ml-5 text-3xl text-left text-green-600 border-b-2 border-green-600">
         Latest posts
       </p>
       {posts.map((post) => (
-        <Post
-          title={post.title}
-          date={post.postedAt}
-          content={post.post}
-          id={post._id}
-          slug={post.slug}
-        />
+        <div key={post._id}>
+          <Post
+            title={post.title}
+            date={post.postedAt}
+            content={post.post}
+            id={post._id}
+            slug={post.slug}
+          />
+        </div>
       ))}
     </motion.div>
   );

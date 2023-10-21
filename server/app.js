@@ -48,7 +48,7 @@ app.post("/api/login", async (req, res) => {
     const match = await bcrypt.compare(password, user.password);
     if (!match) return res.send({ message: "Password doesn't match" });
     jwt.sign({ user: username }, "puguinho", (err, token) => {
-      res.json({ token });
+      res.json({ token, username: user.username });
     });
   } catch (error) {
     console.log(error);
