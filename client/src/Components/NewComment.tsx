@@ -38,7 +38,7 @@ const NewComment = ({ id, setShowNewComment }: Props) => {
 
   return (
     <form
-      className="block border-b-2 border-zinc-500 pb-3"
+      className="block pb-3 border-b-2 border-zinc-500"
       onSubmit={submitComment}
     >
       <div className="">
@@ -48,12 +48,13 @@ const NewComment = ({ id, setShowNewComment }: Props) => {
         <input
           type="text"
           id="author"
-          className="border border-black w-full xl:w-2/4  py-3 px-2 rounded-xl"
+          name="author"
+          className="w-full px-2 py-3 border border-black xl:w-2/4 rounded-xl"
           onChange={handleChange}
           value={message.author}
         />
       </div>
-      <div className=" mt-3">
+      <div className="mt-3 ">
         <label htmlFor="author" className="block mb-2 text-lg ">
           Comment
         </label>
@@ -62,14 +63,14 @@ const NewComment = ({ id, setShowNewComment }: Props) => {
           id="comment"
           cols={30}
           rows={10}
-          className="border border-black rounded-xl w-full py-3 px-2"
+          className="w-full px-2 py-3 border border-black rounded-xl"
           onChange={handleChange}
           value={message.comment}
         ></textarea>
       </div>
       <button
         type="submit"
-        className="border border-black py-3 px-24 rounded-lg mt-3 hover:bg-zinc-200 duration-200"
+        className="px-24 py-3 mt-3 duration-200 border border-black rounded-lg hover:bg-zinc-200"
       >
         New comment
       </button>

@@ -5,6 +5,7 @@ import { DateTime } from "ts-luxon";
 import { motion } from "framer-motion";
 import { FallingLines } from "react-loader-spinner";
 import CommentSection from "../Components/CommentSection";
+import parse from "html-react-parser";
 
 interface Post {
   title: string;
@@ -39,7 +40,7 @@ const PostDetail = () => {
 
   if (load)
     return (
-      <div className="w-screen absolute top-52 grid place-content-center">
+      <div className="absolute grid w-screen top-52 place-content-center">
         <FallingLines color="black" />
       </div>
     );
@@ -52,7 +53,7 @@ const PostDetail = () => {
       exit={{ x: 5000, opacity: 0, transition: { duration: 0.7 } }}
     >
       <h1 className="text-3xl">{post.title}</h1>
-      <span className="border-b-2 border-zinc-500 pb-3 font-extralight ">
+      <span className="pb-3 border-b-2 border-zinc-500 font-extralight ">
         {post.postedAt &&
           DateTime.fromJSDate(
             typeof post.postedAt === "string"
@@ -60,8 +61,9 @@ const PostDetail = () => {
               : post.postedAt
           ).toLocaleString(DateTime.DATETIME_SHORT)}
       </span>
-      <p className="font-light  line leading-8 text-xl">{post.post}</p>
-      <span className="border-t-2 border-zinc-400 my-6"></span>
+      <p className="text-xl font-light leading-8 line">{parse(post.post)}</p>
+
+      <span className="my-6 border-t-2 border-zinc-400"></span>
       {post._id !== undefined && <CommentSection id={post._id} />}
     </motion.div>
   );

@@ -13,7 +13,9 @@ router.post("/auth", verifyToken, (req, res) => {
 
 router.get("/post", async (req, res) => {
   try {
-    const posts = await Post.find({ public: true });
+    const posts = await Post.find({ public: true })
+      .sort({ postedAt: -1 })
+      .exec();
 
     res.send(posts);
   } catch (error) {
@@ -30,7 +32,8 @@ router.post("/post", async (req, res) => {
       public,
     });
     await newPost.save();
-    res.status(201).json({ authData, message: "Post created sucessfully" });
+    const url = await Post.findById(newPost.id, { slug: 1 });
+    res.status(201).json({ message: "Post created sucessfully", slug: url });
   } catch (error) {
     console.log(error);
   }

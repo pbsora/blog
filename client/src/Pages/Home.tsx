@@ -1,8 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Post from "../Components/Post";
 import axios from "axios";
 import { motion } from "framer-motion";
 import { FallingLines } from "react-loader-spinner";
+import { Link } from "react-router-dom";
+import { UserContext } from "../Components/Context/Context";
 
 interface Post {
   _id: string;
@@ -16,6 +18,7 @@ interface Post {
 const Home = () => {
   const [posts, setPosts] = useState<Post[]>([]);
   const [load, setLoad] = useState<boolean>(true);
+  const { logged } = useContext(UserContext);
 
   useEffect(() => {
     const getPosts = async () => {
@@ -48,6 +51,11 @@ const Home = () => {
       <p className="self-start ml-5 text-3xl text-left text-green-600 border-b-2 border-green-600">
         Latest posts
       </p>
+      {logged && (
+        <p className="self-start ml-5 text-3xl text-left text-green-600 border-b-2 border-green-600">
+          <Link to={"/new-post"}>New Post</Link>
+        </p>
+      )}
       {posts.map((post) => (
         <div key={post._id} className="w-full">
           <Post

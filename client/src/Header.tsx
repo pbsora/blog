@@ -20,7 +20,7 @@ function Header() {
           headers: { Authorization: `Bearer ${value}` },
           withCredentials: true,
         });
-        console.log(data);
+
         if (!logged) setLogged(data.user);
       };
       auth();
