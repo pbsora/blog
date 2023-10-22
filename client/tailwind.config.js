@@ -5,6 +5,7 @@ export default {
     extend: {},
     fontFamily: {
       roboto: ["Roboto Mono", "monospace"],
+      bebas: ["Bebas Neue", "sans-serif"],
     },
   },
   plugins: [],

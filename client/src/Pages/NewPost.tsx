@@ -12,6 +12,10 @@ const NewPost = () => {
     title: "",
     post: "",
   });
+  const [error, setError] = useState({
+    error: false,
+    message: "",
+  });
 
   useEffect(() => {
     if (!logged) {
@@ -40,6 +44,11 @@ const NewPost = () => {
         withCredentials: true,
       }
     );
+    if (data.code === 11000)
+      return setError({
+        error: true,
+        message: "A post with this title already exists",
+      });
     navigate(`/post/${data.slug.slug}`);
   };
 
@@ -76,6 +85,9 @@ const NewPost = () => {
           className="w-full px-2 py-3 text-lg border-2 border-black rounded-xl focus:outline-blue-500"
         ></textarea>
       </div>
+      <div className="my-4 text-lg text-center text-red-600">
+        {error.error && <span>{error.message}</span>}
+      </div>
       <div className="flex items-center justify-center w-3/4 gap-6 m-auto mt-6 ">
         <label htmlFor="public" className="text-3xl">
           Public
@@ -88,6 +100,7 @@ const NewPost = () => {
           onChange={() => setIsPublic(!isPublic)}
         />
       </div>
+
       <div className="grid w-3/4 m-auto mt-6 place-content-center">
         <button
           type="submit"

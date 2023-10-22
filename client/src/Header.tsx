@@ -29,9 +29,9 @@ function Header() {
 
   return (
     <>
-      <header className="sticky top-0 z-50 flex items-center justify-around py-6 text-3xl text-white bg-black font-roboto">
+      <header className="sticky top-0 z-50 flex items-center justify-around py-6 text-5xl text-white bg-black font-bebas">
         <h1>
-          <Link to="/">Sora</Link>
+          <Link to="/">Sora Dev</Link>
         </h1>
         <span className="text-[3rem]">
           <a href="https://github.com/pbsora" target="_blank">

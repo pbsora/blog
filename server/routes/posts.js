@@ -36,6 +36,7 @@ router.post("/post", async (req, res) => {
     res.status(201).json({ message: "Post created sucessfully", slug: url });
   } catch (error) {
     console.log(error);
+    res.send(error);
   }
 });
 

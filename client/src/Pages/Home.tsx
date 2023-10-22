@@ -4,7 +4,7 @@ import axios from "axios";
 import { motion } from "framer-motion";
 import { FallingLines } from "react-loader-spinner";
 import { Link } from "react-router-dom";
-import { UserContext } from "../Components/Context/Context";
+import { ILogged, UserContext } from "../Components/Context/Context";
 
 interface Post {
   _id: string;
@@ -18,7 +18,7 @@ interface Post {
 const Home = () => {
   const [posts, setPosts] = useState<Post[]>([]);
   const [load, setLoad] = useState<boolean>(true);
-  const { logged } = useContext(UserContext);
+  const { logged } = useContext(UserContext) as ILogged;
 
   useEffect(() => {
     const getPosts = async () => {

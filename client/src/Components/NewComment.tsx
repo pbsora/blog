@@ -66,7 +66,9 @@ const NewComment = ({ id, setShowNewComment }: Props) => {
           className="w-full px-2 py-3 border border-black rounded-xl"
           onChange={handleChange}
           value={message.comment}
+          maxLength={300}
         ></textarea>
+        <span>{message.comment.length}/300</span>
       </div>
       <button
         type="submit"
